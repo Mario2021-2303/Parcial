@@ -1,0 +1,24 @@
+name: Deploy to Surge
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Build and Deploy
+      run: |
+        # Configurar Surge.sh
+        npm install --global surge
+        surge token  98bc2a139fca1b723857275fdfb78924 
+
+        # Desplegar en Surge.sh
+        surge --project ./ --domain na-west1.surge.sh
+
